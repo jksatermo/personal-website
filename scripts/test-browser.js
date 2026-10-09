@@ -25,6 +25,7 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 const errors = [];
+const pendingPhotos = [];
 let checks = 0;
 function check(condition, message) {
   assert.ok(condition, message);
@@ -58,7 +59,8 @@ try {
   );
   check(
     (await page.getByText("Coming soon", { exact: true }).count()) ===
-      content.projects.filter((project) => project.status === "Coming soon").length,
+      content.projects.filter((project) => project.status === "Coming soon")
+        .length,
     "Upcoming projects are identified",
   );
   for (const social of content.socials.filter((social) => social.url)) {
@@ -72,6 +74,58 @@ try {
       `${social.name} uses the correct profile URL`,
     );
   }
+  if (content.profile.email) {
+    check(
+      (await page
+        .getByRole("link", { name: content.profile.email, exact: true })
+        .getAttribute("href")) === `mailto:${content.profile.email}`,
+      "Professional email opens the user's mail application",
+    );
+  }
+  const communityProject = content.projects.find(
+    (project) => project.kind === "community",
+  );
+  if (communityProject) {
+    check(
+      (await page.locator(".community-brand").innerText()).includes(
+        communityProject.title,
+      ),
+      "Project artwork uses the current church app name",
+    );
+  }
+  for (const photo of [
+    content.profile.portrait,
+    ...(content.aboutPhotos || []),
+  ].filter(Boolean)) {
+    if (photo.src.startsWith("/")) {
+      try {
+        await access(new URL(`../client/public${photo.src}`, import.meta.url));
+      } catch {
+        pendingPhotos.push(photo.src);
+        continue;
+      }
+    }
+    const response = await page.request.get(new URL(photo.src, baseURL).href);
+    check(
+      response.ok() && response.headers()["content-type"]?.startsWith("image/"),
+      `Photo asset is served: ${photo.src}`,
+    );
+    const photoElement = page.getByRole("img", {
+      name: photo.alt,
+      exact: true,
+    });
+    await photoElement.scrollIntoViewIfNeeded();
+    await photoElement.evaluate((element) => element.decode());
+    check(
+      await photoElement.evaluate((element) => element.naturalWidth > 0),
+      `Photo renders: ${photo.src}`,
+    );
+    check(
+      (await photoElement.locator("..").getAttribute("href")) === photo.src,
+      "Full photo can be opened without the display crop",
+    );
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.mouse.move(1000, 180);
   await page.waitForFunction(
     () =>
@@ -164,6 +218,11 @@ try {
     `No uncaught browser errors: ${errors.join("; ")}`,
   );
   console.log(`Passed ${checks} browser checks. Screenshots: ${artifacts}`);
+  if (pendingPhotos.length) {
+    console.log(
+      `Photo rendering is not yet verified; files pending upload: ${pendingPhotos.join(", ")}`,
+    );
+  }
 } finally {
   await browser.close();
 }

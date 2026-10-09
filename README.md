@@ -1,6 +1,6 @@
 # Jackson Satermo · Personal website
 
-An editable MERN portfolio with a dark purple design, a desktop cursor spotlight, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education, social profiles, and two clearly marked coming-soon projects.
+An editable MERN portfolio with a warm ivory design, plum accents, a sage desktop cursor glow, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education, social profiles, professional email, and two clearly marked coming-soon projects. The public site is https://jacksonsatermo.com, hosted on Render with its domain managed through Cloudflare.
 
 React and Vite provide the interface. Express runs the API and serves the built site in production. MongoDB stores the portfolio content through Mongoose. There is no public write API or admin login: edit the source files in your GitHub repository to update the site.
 
@@ -33,6 +33,9 @@ Most changes belong in [`content/portfolio.json`](content/portfolio.json). This 
 | About paragraphs | `profile.bio` — one quoted string per paragraph |
 | The small status line below social links | `profile.availability` |
 | GitHub, LinkedIn, Instagram, and Facebook links | `socials` — each entry has `name` and `url` |
+| Professional email link | `profile.email` — a plain email address |
+| Primary portrait | `profile.portrait` — `src`, `alt`, and optional `position` |
+| About section photos | `aboutPhotos` — each entry has `src`, `alt`, `caption`, and optional `position` |
 | Employment | `experience` — role, company, period, description, and skills |
 | Degree and graduation date | `education` |
 | Project descriptions, status, tags, and links | `projects` |
@@ -55,7 +58,7 @@ To add a future project, duplicate an object inside `projects`, give it a unique
 }
 ```
 
-When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. To add custom images or Bible study photos later, place public image files in `client/public/` and update the relevant React section in [`client/src/App.jsx`](client/src/App.jsx).
+When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. For the white-shirt portrait and circle group photo, add the original JPEG files to `client/public/images/` and point the photo fields above at them. See [photo instructions](client/public/images/README.md). The page crops images only for display and links to each full photo. Unavailable images are omitted; verify the actual photos load before considering the upload complete.
 
 For design changes:
 
@@ -115,9 +118,9 @@ Open **http://localhost:3001**. Set `NODE_ENV=production` in your hosting provid
 
 ## Put the site online
 
-Follow [the deployment guide](docs/DEPLOYMENT.md) to connect GitHub, MongoDB Atlas, and Render. [`render.yaml`](render.yaml) provides a reusable Render configuration. This repository does not imply that a live deployment or a domain registration has already been completed.
+Follow [the deployment guide](docs/DEPLOYMENT.md) to connect GitHub, MongoDB Atlas, and Render. [`render.yaml`](render.yaml) provides a reusable Render configuration. The site is deployed at https://jacksonsatermo.com. With Render automatic deployment enabled, pushes to `main` publish updates; confirm the Render deployment finishes successfully.
 
-`jackson.satermo.com` is a subdomain of `satermo.com`. You need control of `satermo.com`, or its owner's cooperation, to use it. Since you do not own that domain, start with the address supplied by your host and then connect a domain you register. Candidate domain availability must be checked with a registrar.
+The canonical address is `jacksonsatermo.com`. Keep its existing Cloudflare DNS and Render custom-domain settings unless you are deliberately changing hosts or domains.
 
 ## Repository map
 

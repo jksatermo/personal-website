@@ -1,8 +1,8 @@
-# Publish your portfolio
+# Deploy and update your portfolio
 
 The site is designed to run as one Node.js web service: Express serves both the built React page and the API, and MongoDB Atlas supplies the database. GitHub stores your editable source code. GitHub Pages alone cannot run the Express server or MongoDB connection.
 
-You will need a GitHub account, a [MongoDB Atlas](https://www.mongodb.com/atlas) account, and a [Render](https://render.com/) account. Review each provider's current terms, free-tier limits, and pricing before choosing a plan. No hosting account, database, paid plan, or domain is created merely by adding these files to the repository.
+You will need a GitHub account, a [MongoDB Atlas](https://www.mongodb.com/atlas) account, and a [Render](https://render.com/) account. Review each provider's current terms, free-tier limits, and pricing before choosing a plan. The current site is https://jacksonsatermo.com, using Render and Cloudflare. The setup steps below are useful when recreating or moving the deployment; normal content updates only need a commit and a successful Render redeployment.
 
 ## 1. Prepare MongoDB Atlas
 
@@ -56,11 +56,11 @@ If a deployment fails, read the Render logs. For database errors, verify the dat
 
 ## 4. Add a domain you own
 
-`jackson.satermo.com` means “the `jackson` subdomain under `satermo.com`.” A subdomain cannot be independently registered through a registrar. You currently do not own `satermo.com`, so this exact address would require the current owner's cooperation or acquiring control of that parent domain.
+The current domain is `jacksonsatermo.com`, with DNS managed in Cloudflare. Keep the working records and Render custom-domain configuration. You do not need to register another domain or change DNS for routine website updates.
 
-You can publish immediately using Render's supplied URL. If you want a personal domain later:
+If you later choose a different domain:
 
-1. Search for an available domain at a registrar. Names such as `jacksonsatermo.com` or `jacksonsatermo.dev` are ideas only; their availability and prices have not been checked.
+1. Search for an available domain at a registrar. Check the availability and renewal price of any new name before purchasing it.
 2. Review the purchase and renewal prices, then register the domain in your own account. Keep access to that account and enable two-factor authentication.
 3. Open your Render service's **Settings → Custom Domains**, add your chosen hostname, and copy the DNS instructions Render shows.
 4. In the registrar's DNS settings, add the exact record type, hostname, and target that Render provides. A subdomain commonly uses a CNAME; a root domain may use different records. Do not guess IP addresses or copy an example target.

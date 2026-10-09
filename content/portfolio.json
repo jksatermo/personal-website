@@ -5,12 +5,26 @@
     "tagline": "Thoughtful code. Meaningful experiences.",
     "location": "North Dakota",
     "availability": "Building, learning & looking ahead",
+    "email": "jackson.satermo@gmail.com",
+    "portrait": {
+      "src": "/images/jackson-satermo.jpg",
+      "alt": "Jackson Satermo smiling in a white shirt outdoors.",
+      "position": "50% 35%"
+    },
     "bio": [
-      "I'm a software engineer who enjoys turning complex problems into thoughtful, useful experiences on the web. I'm drawn to the intersection of good design and solid engineering \u2014 where the details make all the difference.",
+      "I'm a software engineer who enjoys turning complex problems into thoughtful, useful experiences on the web. I'm drawn to the intersection of good design and solid engineering — where the details make all the difference.",
       "These days, I'm a Programmer Analyst at the North Dakota University System, working across web development, PeopleSoft, PeopleTools, PeopleCode, and SQL. I earned my bachelor's degree from North Dakota State University in May 2025, and I'm excited to keep learning by building things that matter.",
-      "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with a 3D printer and modifying electronics. My faith, my community, and an active life keep me grounded \u2014 and give me plenty of ideas for what to build next."
+      "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with a 3D printer and modifying electronics. My faith, my community, and an active life keep me grounded — and give me plenty of ideas for what to build next."
     ]
   },
+  "aboutPhotos": [
+    {
+      "src": "/images/bible-study-circle.jpg",
+      "alt": "Jackson’s Bible study group gathered in a large circle at church.",
+      "caption": "Faith, friendship, and a place to belong. The Bible study community I’m grateful to lead.",
+      "position": "50% 70%"
+    }
+  ],
   "socials": [
     {
       "name": "GitHub",
@@ -35,7 +49,7 @@
       "role": "Programmer Analyst",
       "company": "North Dakota University System",
       "url": "https://ndus.edu/",
-      "period": "JAN 2026 \u2014 PRESENT",
+      "period": "JAN 2026 — PRESENT",
       "description": "Develop and support web applications for the North Dakota University System. Work with PeopleSoft, PeopleTools, and PeopleCode, with extensive hands-on SQL experience to support the systems people rely on every day.",
       "skills": [
         "Web Development",
@@ -64,12 +78,12 @@
     },
     {
       "id": "church-reimagined",
-      "title": "Church, Reimagined",
+      "title": "Many Rooms",
       "eyebrow": "COMMUNITY & BETTER TOOLS",
-      "description": "An independent exploration of a better church planning experience. Inspired by conversations with my church family, I'm rethinking how tools like Planning Center could make serving, scheduling, and staying connected simpler.",
+      "description": "Inspired by the idea of a place for everyone—and my experience coordinating 70+ church volunteers—Many Rooms is a concept for simpler church life. It would bring schedules, team coordination, and group messaging into one place, with text-message “Accept” or “Decline” replies for volunteers without smartphones and shared conversations to help leaders resolve scheduling conflicts.",
       "status": "Coming soon",
       "kind": "community",
-      "tags": ["Church community", "Product design", "Web app"],
+      "tags": ["Volunteer scheduling", "Team messaging", "Text confirmations"],
       "url": null
     }
   ],

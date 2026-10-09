@@ -13,6 +13,7 @@ import {
   Instagram,
   Leaf,
   Linkedin,
+  Mail,
   MapPin,
   Plus,
   Printer,
@@ -55,7 +56,7 @@ function Spotlight() {
   return <div className="spotlight" ref={light} aria-hidden="true" />;
 }
 
-function SocialLinks({ socials }) {
+function SocialLinks({ socials, email }) {
   const [notice, setNotice] = useState("");
   useEffect(() => {
     if (!notice) return;
@@ -94,6 +95,12 @@ function SocialLinks({ socials }) {
           );
         })}
       </div>
+      {email && (
+        <a className="email-link" href={`mailto:${email}`}>
+          <Mail size={17} strokeWidth={1.7} />
+          {email}
+        </a>
+      )}
       <p className="social-notice" role="status">
         {notice}
       </p>
@@ -101,7 +108,37 @@ function SocialLinks({ socials }) {
   );
 }
 
-function ProjectArt({ kind }) {
+function PortfolioPhoto({ photo, portrait = false }) {
+  const [failed, setFailed] = useState(false);
+  useEffect(() => setFailed(false), [photo?.src]);
+  if (!photo?.src || failed) return null;
+
+  return (
+    <figure className={portrait ? "portrait" : "community-photo"}>
+      <a
+        href={photo.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`View full photo: ${photo.alt} (opens in a new tab)`}
+      >
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          width={portrait ? 1448 : 2800}
+          height={portrait ? 2172 : 4032}
+          loading={portrait ? "eager" : "lazy"}
+          fetchPriority={portrait ? "high" : "auto"}
+          decoding="async"
+          style={{ objectPosition: photo.position || "center" }}
+          onError={() => setFailed(true)}
+        />
+      </a>
+      {photo.caption && <figcaption>{photo.caption}</figcaption>}
+    </figure>
+  );
+}
+
+function ProjectArt({ kind, title }) {
   if (kind === "wellness")
     return (
       <div className="project-art wellness-art" aria-hidden="true">
@@ -145,7 +182,8 @@ function ProjectArt({ kind }) {
         <span className="brand-mark">
           <Plus size={19} />
         </span>{" "}
-        together<span className="art-menu">A LITTLE MORE CONNECTED.</span>
+        {title}
+        <span className="art-menu">A LITTLE MORE CONNECTED.</span>
       </div>
       <div className="community-body">
         <div className="community-copy">
@@ -318,7 +356,7 @@ export default function App() {
             </nav>
           </div>
           <div className="profile-bottom">
-            <SocialLinks socials={socials} />
+            <SocialLinks socials={socials} email={profile.email} />
             <div className="building-note">
               <span className="status-dot" />
               {profile.availability}
@@ -335,13 +373,12 @@ export default function App() {
               <Sparkles size={16} className="heading-sparkle" />
             </div>
             <div className="about-copy">
-              {profile.bio.map((paragraph, index) => (
-                <p
-                  key={paragraph}
-                  className={index === 0 ? "lead-paragraph" : ""}
-                >
-                  {paragraph}
-                </p>
+              <div className="about-lead">
+                <p className="lead-paragraph">{profile.bio[0]}</p>
+                <PortfolioPhoto photo={profile.portrait} portrait />
+              </div>
+              {profile.bio.slice(1).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
             <div className="interests" aria-label="Outside of work">
@@ -355,6 +392,13 @@ export default function App() {
                 );
               })}
             </div>
+            {portfolio.aboutPhotos?.length > 0 && (
+              <div className="about-gallery">
+                {portfolio.aboutPhotos.map((photo) => (
+                  <PortfolioPhoto key={photo.src} photo={photo} />
+                ))}
+              </div>
+            )}
             <a className="text-link explore-link" href="#projects">
               See what I'm working on <ArrowDown size={15} />
             </a>
@@ -406,7 +450,7 @@ export default function App() {
           </section>
 
           <section id="projects" aria-label="Projects">
-            <SectionHeading number="03">Ideas becoming things</SectionHeading>
+            <SectionHeading number="03">Bringing ideas to life</SectionHeading>
             <p className="section-intro">
               A few things I'm excited to bring to life.
               <br />
@@ -418,7 +462,7 @@ export default function App() {
                   className={`project-card ${project.kind}`}
                   key={project.id}
                 >
-                  <ProjectArt kind={project.kind} />
+                  <ProjectArt kind={project.kind} title={project.title} />
                   <div className="project-details">
                     <div className="project-eyebrow">
                       <span>
@@ -473,8 +517,8 @@ export default function App() {
             <p>Always a work in progress. Just like me.</p>
             <div>
               <span>
-                Built with intention <span className="footer-star">✧</span> and
-                a little purple.
+                Built with intention <span className="footer-star">✧</span> Made
+                to grow.
               </span>
               <a href="#about" aria-label="Back to top">
                 Back to top <ArrowUpRight size={12} />
