@@ -1,11 +1,13 @@
 # Portfolio photos
 
-Place the original photo files in this folder. The portfolio is set up for:
+The original uploaded files are preserved in this folder. The portfolio uses:
 
-- `jackson-satermo.jpg`: Jackson's primary portrait in the white shirt.
-- `bible-study-circle.jpg`: the large Bible study group seated in a circle.
+- `BestPhoto_Edited.JPEG`: Jackson's primary portrait in the white shirt.
+- `life_group_circle.JPEG`: the large Bible study group seated in a circle.
 
-Use the real JPEG files, not a screenshot of them. If your source uses another
+`life_group_APB.JPEG` is also retained as an optional additional group photo. The current layout features the circle photo to keep the About section focused.
+
+For future uploads, use the real JPEG files, not a screenshot of them. If your source uses another
 format, keep its actual extension and update the `src` in `content/portfolio.json`.
 Do not just rename an HEIC file to `.jpg`; export it as a JPEG first.
 

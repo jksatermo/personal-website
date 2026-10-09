@@ -7,7 +7,7 @@
     "availability": "Building, learning & looking ahead",
     "email": "jackson.satermo@gmail.com",
     "portrait": {
-      "src": "/images/jackson-satermo.jpg",
+      "src": "/images/BestPhoto_Edited.JPEG",
       "alt": "Jackson Satermo smiling in a white shirt outdoors.",
       "position": "50% 35%"
     },
@@ -19,7 +19,7 @@
   },
   "aboutPhotos": [
     {
-      "src": "/images/bible-study-circle.jpg",
+      "src": "/images/life_group_circle.JPEG",
       "alt": "Jackson’s Bible study group gathered in a large circle at church.",
       "caption": "Faith, friendship, and a place to belong. The Bible study community I’m grateful to lead.",
       "position": "50% 70%"
@@ -73,7 +73,11 @@
       "description": "A home for the habits that helped me lose 100 lbs through diet and exercise, without GLP-1s. Sharing my journey, progress photos, go-to recipes, and practical training tips to help others find their own way forward.",
       "status": "Coming soon",
       "kind": "wellness",
-      "tags": ["Recipes", "Fitness", "Personal journey"],
+      "tags": [
+        "Recipes",
+        "Fitness",
+        "Personal journey"
+      ],
       "url": null
     },
     {
@@ -83,7 +87,11 @@
       "description": "Inspired by the idea of a place for everyone—and my experience coordinating 70+ church volunteers—Many Rooms is a concept for simpler church life. It would bring schedules, team coordination, and group messaging into one place, with text-message “Accept” or “Decline” replies for volunteers without smartphones and shared conversations to help leaders resolve scheduling conflicts.",
       "status": "Coming soon",
       "kind": "community",
-      "tags": ["Volunteer scheduling", "Team messaging", "Text confirmations"],
+      "tags": [
+        "Volunteer scheduling",
+        "Team messaging",
+        "Text confirmations"
+      ],
       "url": null
     }
   ],

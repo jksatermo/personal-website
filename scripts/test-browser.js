@@ -188,6 +188,16 @@ try {
           .evaluate((element) => getComputedStyle(element).display === "none"),
         "Mobile avoids the desktop spotlight",
       );
+      // Lazy group photos load when scrolled into view, including on phones.
+      for (const photo of await page.locator("#about img").all()) {
+        await photo.scrollIntoViewIfNeeded();
+        await photo.evaluate((element) => element.decode());
+        check(
+          await photo.evaluate((element) => element.naturalWidth > 0 && element.getBoundingClientRect().right <= window.innerWidth),
+          "Photo loads and fits the mobile viewport",
+        );
+      }
+      await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
       await page.screenshot({
         path: path.join(artifacts, "mobile.png"),
         fullPage: true,
