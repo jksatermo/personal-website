@@ -1,0 +1,82 @@
+{
+  "profile": {
+    "name": "Jackson Satermo",
+    "role": "Software Engineer",
+    "tagline": "Thoughtful code. Meaningful experiences.",
+    "location": "North Dakota",
+    "availability": "Building, learning & looking ahead",
+    "bio": [
+      "I'm a software engineer who enjoys turning complex problems into thoughtful, useful experiences on the web. I'm drawn to the intersection of good design and solid engineering \u2014 where the details make all the difference.",
+      "These days, I'm a Programmer Analyst at the North Dakota University System, working across web development, PeopleSoft, PeopleTools, PeopleCode, and SQL. I earned my bachelor's degree from North Dakota State University in May 2025, and I'm excited to keep learning by building things that matter.",
+      "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with a 3D printer and modifying electronics. My faith, my community, and an active life keep me grounded \u2014 and give me plenty of ideas for what to build next."
+    ]
+  },
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/jksatermo"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/jackson-satermo"
+    },
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/jackson.satermo/"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/jackson.satermo"
+    }
+  ],
+  "experience": [
+    {
+      "id": "ndus",
+      "role": "Programmer Analyst",
+      "company": "North Dakota University System",
+      "url": "https://ndus.edu/",
+      "period": "JAN 2026 \u2014 PRESENT",
+      "description": "Develop and support web applications for the North Dakota University System. Work with PeopleSoft, PeopleTools, and PeopleCode, with extensive hands-on SQL experience to support the systems people rely on every day.",
+      "skills": [
+        "Web Development",
+        "PeopleSoft",
+        "PeopleTools",
+        "PeopleCode",
+        "SQL"
+      ]
+    }
+  ],
+  "education": {
+    "degree": "Bachelor's degree",
+    "school": "North Dakota State University",
+    "date": "MAY 2025"
+  },
+  "projects": [
+    {
+      "id": "everyday-progress",
+      "title": "Everyday Progress",
+      "eyebrow": "HEALTH & PERSONAL GROWTH",
+      "description": "A home for the habits that helped me lose 100 lbs through diet and exercise, without GLP-1s. Sharing my journey, progress photos, go-to recipes, and practical training tips to help others find their own way forward.",
+      "status": "Coming soon",
+      "kind": "wellness",
+      "tags": ["Recipes", "Fitness", "Personal journey"],
+      "url": null
+    },
+    {
+      "id": "church-reimagined",
+      "title": "Church, Reimagined",
+      "eyebrow": "COMMUNITY & BETTER TOOLS",
+      "description": "An independent exploration of a better church planning experience. Inspired by conversations with my church family, I'm rethinking how tools like Planning Center could make serving, scheduling, and staying connected simpler.",
+      "status": "Coming soon",
+      "kind": "community",
+      "tags": ["Church community", "Product design", "Web app"],
+      "url": null
+    }
+  ],
+  "interests": [
+    "Sports & fitness",
+    "Faith & community",
+    "3D printing",
+    "Electronics"
+  ]
+}

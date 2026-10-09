@@ -1,0 +1,133 @@
+# Jackson Satermo · Personal website
+
+An editable MERN portfolio with a dark purple design, a desktop cursor spotlight, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education, social profiles, and two clearly marked coming-soon projects.
+
+React and Vite provide the interface. Express runs the API and serves the built site in production. MongoDB stores the portfolio content through Mongoose. There is no public write API or admin login: edit the source files in your GitHub repository to update the site.
+
+## Run it on your computer
+
+Install [Node.js 24](https://nodejs.org/) and [Git](https://git-scm.com/), then open a terminal:
+
+```bash
+git clone https://github.com/jksatermo/personal-website.git
+cd personal-website
+npm ci
+npm run dev
+```
+
+Open **http://localhost:5173**. The Express API runs at **http://localhost:3001**. Stop both servers with `Ctrl+C`.
+
+`npm run dev` starts a real local MongoDB process using `mongodb-memory-server` when `MONGODB_URI` is unset. The first run downloads a checksum-verified MongoDB binary, so allow time and internet access. Local database files persist in the ignored `.data/mongodb/` directory, and downloaded binaries are cached in `.cache/mongodb-binaries/`. You do not need an Atlas account for local development.
+
+If you already have a MongoDB database, copy `.env.example` to `.env` and set `MONGODB_URI` there. The development script will use it instead. Keep `.env` private; it is excluded from Git.
+
+If a Linux cloud environment blocks MongoDB's download server but provides Docker, run `npm run setup:mongodb:docker` once, then retry `npm run dev` or `npm test`. This optional helper pulls the pinned official MongoDB image through Docker's digest verification and extracts the binary into the ignored `.cache/mongodb-docker/` directory. It requires a working Docker daemon and compatible Linux libraries; it is not needed for a normal local installation or for Atlas-backed production hosting.
+
+## Make it your own
+
+Most changes belong in [`content/portfolio.json`](content/portfolio.json). This is the source of truth: the server validates it and syncs it to MongoDB every time the server starts. Direct changes in MongoDB will be replaced on the next server start. The development server watches content changes; refresh the browser after saving. On a hosted site, commit your changes and redeploy.
+
+| What to change | Where to edit |
+| --- | --- |
+| Name, headline, location, and short introduction | `profile.name`, `profile.role`, `profile.tagline`, `profile.location` |
+| About paragraphs | `profile.bio` — one quoted string per paragraph |
+| The small status line below social links | `profile.availability` |
+| GitHub, LinkedIn, Instagram, and Facebook links | `socials` — each entry has `name` and `url` |
+| Employment | `experience` — role, company, period, description, and skills |
+| Degree and graduation date | `education` |
+| Project descriptions, status, tags, and links | `projects` |
+| Hobbies displayed below the About text | `interests` |
+
+JSON requires double quotes and does not allow comments or trailing commas. Use full `https://` URLs for external links. Use `null` for a project that has no public URL yet.
+
+To add a future project, duplicate an object inside `projects`, give it a unique `id`, and edit the fields:
+
+```json
+{
+  "id": "my-next-project",
+  "title": "My Next Project",
+  "eyebrow": "WEB DEVELOPMENT",
+  "description": "A short explanation of what this project does and why I built it.",
+  "status": "Coming soon",
+  "kind": "community",
+  "tags": ["React", "Node.js", "MongoDB"],
+  "url": null
+}
+```
+
+When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. To add custom images or Bible study photos later, place public image files in `client/public/` and update the relevant React section in [`client/src/App.jsx`](client/src/App.jsx).
+
+For design changes:
+
+- Edit colors and layout in [`client/src/styles.css`](client/src/styles.css). Start with the `:root` background and the `--text`, `--accent`, `--muted`, and `--border` variables. Some illustration and component colors are defined further down the file.
+- Edit section structure and interactions in [`client/src/App.jsx`](client/src/App.jsx).
+- Edit the browser description, title, and theme color in [`client/index.html`](client/index.html).
+- Replace the browser icon in [`client/public/favicon.svg`](client/public/favicon.svg).
+
+The page includes keyboard focus styles, a skip link, mobile layouts, and reduced-motion support. The spotlight runs on desktop pointer movement and is disabled when reduced motion is requested.
+
+## Edit directly on GitHub
+
+Open [jksatermo/personal-website](https://github.com/jksatermo/personal-website), select the `main` branch, and open the file you want to change. Use GitHub's pencil icon to edit and **Commit changes** to save. With automatic deployment enabled on your host, a commit to `main` triggers a new deployment.
+
+For larger changes, clone the repository using the commands above and open the folder in a code editor such as VS Code. After editing and checking the site locally:
+
+```bash
+git add content/portfolio.json
+git commit -m "Update portfolio content"
+git push origin main
+```
+
+Include other changed files in `git add` as needed. Never commit database credentials or `.env` files.
+
+## Commands and checks
+
+| Command | Purpose |
+| --- | --- |
+| `npm ci` | Install the exact locked dependencies |
+| `npm run dev` | Start MongoDB, the Express API, and the React development server |
+| `npm test` | Run API tests against an isolated real MongoDB database |
+| `npm run test:browser` | Check a running site in Chromium, including navigation, mobile layout, and reduced motion |
+| `npm run build` | Build the React client into `client/dist/` |
+| `npm start` | Run Express; requires `MONGODB_URI` and serves `client/dist/` when present |
+| `npm run seed` | Sync the content file to the database specified by `MONGODB_URI` |
+| `npm run setup:mongodb:docker` | Optional Linux/Docker fallback when MongoDB's normal binary download is blocked |
+
+Tests use a separate database and do not modify your configured production database. The first test run may also need to download MongoDB.
+
+For browser checks, keep `npm run dev` running in one terminal. In another, install a browser once with `npx playwright install chromium`, then run `npm run test:browser`. The script uses `/usr/bin/chromium` when available, or Playwright's downloaded Chromium otherwise. Optional environment variables are `TEST_BASE_URL` for another running site, `CHROMIUM_PATH` for a browser executable, and `BROWSER_ARTIFACTS` for the screenshot directory. Screenshots default to `/tmp/personal-website-browser`.
+
+Useful API endpoints:
+
+- `GET /api/health`: database connection status; returns HTTP 200 when connected and 503 when unavailable.
+- `GET /api/portfolio`: the current public portfolio content from MongoDB.
+
+The React build also includes the public content file as an initial display and fallback if the API is temporarily unavailable. This content is public; do not add secrets to it.
+
+To try a production build locally, set a working `MONGODB_URI` in `.env`, then run:
+
+```bash
+npm run build
+npm start
+```
+
+Open **http://localhost:3001**. Set `NODE_ENV=production` in your hosting provider's environment settings for deployment.
+
+## Put the site online
+
+Follow [the deployment guide](docs/DEPLOYMENT.md) to connect GitHub, MongoDB Atlas, and Render. [`render.yaml`](render.yaml) provides a reusable Render configuration. This repository does not imply that a live deployment or a domain registration has already been completed.
+
+`jackson.satermo.com` is a subdomain of `satermo.com`. You need control of `satermo.com`, or its owner's cooperation, to use it. Since you do not own that domain, start with the address supplied by your host and then connect a domain you register. Candidate domain availability must be checked with a registrar.
+
+## Repository map
+
+```text
+client/                 React interface, styles, and public images
+content/portfolio.json  Editable public content
+server/                 Express API, MongoDB model, and API tests
+scripts/                Local development and MongoDB helpers
+docs/DEPLOYMENT.md       Hosting and domain instructions
+render.yaml             Render service configuration
+```
+
+For Codex cloud tasks, use the existing checkout. Each task already has an isolated environment; a separate Git worktree is unnecessary unless explicitly requested.
