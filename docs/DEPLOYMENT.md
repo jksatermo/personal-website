@@ -50,7 +50,7 @@ Once Render reports a successful deployment, open the HTTPS address it assigns, 
 - Check the page on your phone and computer, including all three section links and the social links.
 - Visit `/api/health` at that address. It should report `"status":"ok"` and `"database":"connected"`.
 - Visit `/api/portfolio` to confirm the public content API responds.
-- Confirm that both unfinished projects are still marked **Coming soon** until you publish them.
+- Confirm Many Rooms remains **In development**, Everyday Progress remains **Coming soon**, and the Resume action opens the approved public PDF without a phone number.
 
 If a deployment fails, read the Render logs. For database errors, verify the database username/password, database permissions, cluster availability, and Atlas network rules. For build errors, confirm Node 24 and the exact build command above. Do not paste a database connection string into public logs, issues, or screenshots.
 
