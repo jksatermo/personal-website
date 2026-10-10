@@ -15,7 +15,8 @@
       "I'm a software developer in Fargo who enjoys learning how people work, finding the friction in a process, and building software that makes it simpler. I like unfamiliar problems, direct feedback, and collaborating with people who understand the business from different perspectives.",
       "At the North Dakota University System, I build and support enterprise applications used across North Dakota's public university system. My work spans Oracle SQL, PeopleCode, Application Engine, HTML, CSS, JavaScript, integrations, testing, and production support, from understanding requirements through validating and releasing changes.",
       "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with 3D printing and electronics. My faith, community, and hobbies keep me grounded, curious, and usually thinking about the next thing worth building."
-    ]
+    ],
+    "resume": "/Jackson-Satermo-Resume.pdf"
   },
   "aboutPhotos": [
     {
@@ -135,6 +136,17 @@
         "Application Designer",
         "Application Engine"
       ]
+    },
+    {
+      "title": "Building with now",
+      "skills": [
+        "C#",
+        "ASP.NET Core",
+        "React Native",
+        "PostgreSQL",
+        "Entity Framework Core",
+        "Docker"
+      ]
     }
   ],
   "projects": [
@@ -162,11 +174,18 @@
     {
       "id": "church-reimagined",
       "title": "Many Rooms",
-      "eyebrow": "COMMUNITY & BETTER TOOLS",
-      "description": "I'm building Many Rooms, a full-stack web and mobile platform designed to simplify church scheduling, volunteer coordination, events, and team communication. The product includes ideas such as SMS-based Accept/Decline responses for volunteers who aren't using the app and shared workflows that help leaders resolve scheduling conflicts.",
+      "eyebrow": "FULL-STACK WEB & MOBILE",
+      "description": "A full-stack web and mobile volunteer scheduling platform for churches and community organizations. Built with ASP.NET Core, React, React Native, and PostgreSQL, with persisted assignment responses, volunteer availability, scheduling-conflict detection, organization-scoped permissions, and leader scheduling workflows.",
       "status": "In development",
       "kind": "community",
-      "tags": ["Volunteer scheduling", "Team messaging", "Text confirmations"],
+      "tags": [
+        "C#",
+        "ASP.NET Core",
+        "React",
+        "React Native",
+        "TypeScript",
+        "PostgreSQL"
+      ],
       "url": null,
       "links": [
         {

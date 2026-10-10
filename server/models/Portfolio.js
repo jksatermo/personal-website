@@ -43,6 +43,14 @@ const portfolioSchema = new Schema(
             message: "Contact email must be a valid email address.",
           },
         },
+        resume: {
+          type: String,
+          validate: {
+            validator: (value) =>
+              value == null || /^\/(?!\/)[^\s\\?#]+\.pdf$/.test(value),
+            message: "Resume must be a root-relative public PDF path.",
+          },
+        },
         portrait: new Schema(photoFields, nested),
         bio: [String],
       },

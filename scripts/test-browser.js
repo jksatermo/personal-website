@@ -122,6 +122,47 @@ try {
       "Professional email opens the user's mail application",
     );
   }
+  if (content.profile.resume) {
+    const resume = page.getByRole("link", {
+      name: `${content.profile.name} resume (PDF, opens in a new tab)`,
+      exact: true,
+    });
+    const rel = (await resume.getAttribute("rel"))?.split(/\s+/);
+    check(
+      (await resume.getAttribute("href")) === content.profile.resume &&
+        (await resume.getAttribute("target")) === "_blank" &&
+        (await resume.getAttribute("type")) === "application/pdf" &&
+        rel?.includes("noopener") &&
+        rel.includes("noreferrer"),
+      "The public resume has a descriptive, safe document link",
+    );
+    const response = await page.request.get(
+      new URL(content.profile.resume, baseURL).href,
+    );
+    const publicPdf = await readFile(
+      new URL(`../client/public${content.profile.resume}`, import.meta.url),
+    );
+    check(
+      response.ok() &&
+        response.headers()["content-type"]?.startsWith("application/pdf") &&
+        (await response.body()).equals(publicPdf) &&
+        publicPdf.subarray(0, 5).toString() === "%PDF-",
+      "The resume link serves the exact public PDF, not a fallback page",
+    );
+    await page.locator(".email-link").focus();
+    await page.keyboard.press("Tab");
+    check(
+      await resume.evaluate((element) => document.activeElement === element),
+      "Resume is keyboard reachable directly after email",
+    );
+  }
+  check(
+    (await page.locator('a[href^="tel:"]').count()) === 0 &&
+      !/(?:\+?1[\s.-]?)?\(?[2-9]\d{2}\)?[\s.-]?\d{3}[\s.-]?\d{4}\b/.test(
+        await page.locator("body").innerText(),
+      ),
+    "The public page contains no phone number or telephone link",
+  );
   const communityProject = content.projects.find(
     (project) => project.kind === "community",
   );
@@ -216,6 +257,16 @@ try {
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
       `No horizontal overflow at ${width}px`,
+    );
+    check(
+      await page.locator(".project-tags > span").evaluateAll((tags) =>
+        tags.every((tag) => {
+          const bounds = tag.getBoundingClientRect();
+          const parent = tag.parentElement.getBoundingClientRect();
+          return bounds.left >= parent.left && bounds.right <= parent.right + 1;
+        }),
+      ),
+      `Project technology tags wrap inside their cards at ${width}px`,
     );
     if (width === 390) {
       check(

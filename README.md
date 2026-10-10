@@ -73,8 +73,8 @@ The page includes keyboard focus styles, a skip link, mobile layouts, and reduce
 
 ## Content follow-ups
 
-- **Resume TODO:** no resume PDF exists in this repository. Add your current, approved PDF under `client/public/` (for example, `resume.pdf`), then add a visible Resume link beside the email/social links in `client/src/App.jsx`. Do not publish a placeholder or an outdated resume.
-- **Many Rooms stack:** its repository is linked, but the planned technology tags and a new “Building with now” group are intentionally deferred until real C#, ASP.NET Core, React Native, and PostgreSQL code has been created and verified in `jksatermo/Many-Rooms`. Keep that future group separate from professional experience. The MERN footer describes this portfolio and remains accurate.
+- **Public resume:** the owner-provided PDF is stored unchanged at `client/public/Jackson-Satermo-Resume.pdf`, linked beside the email/social actions through `profile.resume`. It contains no phone number. Replace only with an approved public resume; never add a private application-specific copy.
+- **Many Rooms stack:** the project description and tags reflect the implemented web/mobile scheduling, availability, conflict detection, and leader workflows in merged Milestones 1 and 2. “Building with now” distinguishes its actively used technologies from professional NDUS experience. The project remains in development; production authentication, SMS, recurring events, native distribution, and a hosted live demo are not claimed. The MERN footer describes this portfolio.
 - **Capstone source:** the AI Resume Matcher action points to the [official NDSU 2024 capstone page](https://www.ndsu.edu/computer-science/current-students/capstone-program/2024-projects#:~:text=Kompletion%20LLC). The text fragment highlights Kompletion in supporting browsers; other browsers still open the official page. The contribution is limited to membership in its four-person team, with no individual responsibilities or metrics inferred.
 
 ## Edit directly on GitHub

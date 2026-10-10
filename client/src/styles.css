@@ -43,6 +43,7 @@ a {
 .about-copy p a,
 .community-photo figcaption a,
 .email-link,
+.resume-link,
 .text-link,
 .company-link,
 .project-details h3 a,
@@ -56,6 +57,7 @@ footer a {
 .about-copy p a:hover,
 .community-photo figcaption a:hover,
 .email-link:hover,
+.resume-link:hover,
 .text-link:hover,
 .company-link:hover,
 .project-details h3 a:hover,
@@ -276,7 +278,13 @@ h1 {
   color: #174f49;
   transform: translateY(-3px);
 }
-.email-link {
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 22px;
+}
+.email-link,
+.resume-link {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -285,7 +293,8 @@ h1 {
   font-size: 14px;
   overflow-wrap: anywhere;
 }
-.email-link:hover {
+.email-link:hover,
+.resume-link:hover {
   color: #174f49;
   text-decoration: underline;
   text-underline-offset: 4px;

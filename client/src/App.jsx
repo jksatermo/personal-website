@@ -8,6 +8,7 @@ import {
   Code2,
   Dumbbell,
   Facebook,
+  FileText,
   Github,
   GraduationCap,
   Heart,
@@ -57,7 +58,7 @@ function Spotlight() {
   return <div className="spotlight" ref={light} aria-hidden="true" />;
 }
 
-function SocialLinks({ socials, email }) {
+function SocialLinks({ socials, email, resume, name }) {
   const [notice, setNotice] = useState("");
   useEffect(() => {
     if (!notice) return;
@@ -96,12 +97,27 @@ function SocialLinks({ socials, email }) {
           );
         })}
       </div>
-      {email && (
-        <a className="email-link" href={`mailto:${email}`}>
-          <Mail size={17} strokeWidth={1.7} />
-          {email}
-        </a>
-      )}
+      <div className="contact-links">
+        {email && (
+          <a className="email-link" href={`mailto:${email}`}>
+            <Mail size={17} strokeWidth={1.7} />
+            {email}
+          </a>
+        )}
+        {resume && (
+          <a
+            className="resume-link"
+            href={resume}
+            type="application/pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name} resume (PDF, opens in a new tab)`}
+          >
+            <FileText size={17} strokeWidth={1.7} aria-hidden="true" />
+            Resume
+          </a>
+        )}
+      </div>
       <p className="social-notice" role="status">
         {notice}
       </p>
@@ -460,7 +476,12 @@ export default function App() {
             </nav>
           </div>
           <div className="profile-bottom">
-            <SocialLinks socials={socials} email={profile.email} />
+            <SocialLinks
+              socials={socials}
+              email={profile.email}
+              resume={profile.resume}
+              name={profile.name}
+            />
             <div className="building-note">
               <span className="status-dot" />
               {profile.availability}
