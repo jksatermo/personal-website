@@ -500,6 +500,21 @@ main section {
   font-weight: 550;
   letter-spacing: -0.15px;
 }
+.company-details {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+.company-name {
+  color: var(--accent);
+  font-size: 15px;
+  margin-top: 6px;
+}
+.job-location {
+  color: var(--muted);
+  font-size: 12px;
+}
 .company-link {
   display: inline-flex;
   align-items: center;
@@ -536,6 +551,37 @@ main section {
   border-radius: 4px;
   background: #e5eee8;
   color: #2d6255;
+}
+.experience-card.compact {
+  margin-top: 24px;
+  padding-top: 3px;
+  border-left-color: var(--border);
+}
+.experience-card.compact .experience-dot {
+  width: 5px;
+  height: 5px;
+  left: -3px;
+  background: #789287;
+}
+.experience-card.compact .experience-content {
+  padding-top: 10px;
+}
+.experience-card.compact h3 {
+  font-size: 16px;
+}
+.experience-card.compact .experience-content > p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 9px;
+}
+.experience-card.compact .tags {
+  gap: 6px 12px;
+  margin-top: 10px;
+}
+.experience-card.compact .tags span {
+  background: transparent;
+  color: var(--muted);
+  padding: 0;
 }
 .education {
   border-top: 1px solid var(--border);
@@ -660,6 +706,103 @@ main section {
   overflow: hidden;
   margin: 8px 8px 0;
   border-radius: 4px;
+}
+.matcher-art {
+  background: #e9efea;
+  color: #303f39;
+  padding: 19px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.matcher-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.matcher-brand > svg {
+  color: var(--accent);
+}
+.matcher-brand .art-menu {
+  color: #596451;
+  margin-left: auto;
+  text-align: right;
+}
+.matcher-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+  align-items: center;
+  margin: 13px 0;
+}
+.matcher-document {
+  padding: 12px;
+  border: 1px solid #cbd8ce;
+  border-radius: 5px;
+  background: #fafbf7;
+  box-shadow: 0 5px 15px #234c3e08;
+}
+.matcher-label {
+  font-size: 6px;
+  letter-spacing: 0.7px;
+  color: #596451;
+}
+.matcher-document strong {
+  display: block;
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.matcher-lines {
+  display: grid;
+  gap: 5px;
+  margin: 10px 0;
+}
+.matcher-lines i {
+  height: 3px;
+  background: #dbe4dd;
+  border-radius: 3px;
+}
+.matcher-lines i:nth-child(2) {
+  width: 85%;
+}
+.matcher-lines i:last-child {
+  width: 60%;
+  background: #b2cabc;
+}
+.matcher-highlight {
+  font-size: 6px;
+  color: #2d6255;
+}
+.matcher-connection {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  position: relative;
+}
+.matcher-connection::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid #a7beb0;
+}
+.matcher-connection svg {
+  position: relative;
+  background: #e9efea;
+  box-shadow: 0 0 0 4px #e9efea;
+}
+.matcher-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #596451;
+  font-size: 7px;
+}
+.matcher-caption span:last-child {
+  font-size: 5px;
+  letter-spacing: 0.7px;
 }
 .wellness-art {
   background: #182a29;
@@ -963,23 +1106,30 @@ main section {
   letter-spacing: 0.8px;
   color: #626d68;
 }
-.coming-soon {
+.project-status {
   display: flex;
   align-items: center;
   gap: 5px;
   white-space: nowrap;
   font-size: 11px;
-  color: #2d6255;
-  border: 1px solid #cbded2;
-  background: #edf3ee;
   border-radius: 20px;
   padding: 4px 7px;
+  border: 1px solid;
 }
-.coming-soon > span {
-  height: 3px;
-  width: 3px;
-  border-radius: 50%;
-  background: #21665f;
+.status-completed {
+  color: #2d6255;
+  border-color: #cbded2;
+  background: #edf3ee;
+}
+.status-in-development {
+  color: #21564f;
+  border-color: #c1d7d3;
+  background: #e4efed;
+}
+.status-coming-soon {
+  color: #655b44;
+  border-color: #dfd8c9;
+  background: #f3efe5;
 }
 .project-details h3 {
   font-family: "Manrope Variable", sans-serif;
@@ -999,6 +1149,20 @@ main section {
   line-height: 1.85;
   color: #4f5754;
   margin-top: 10px;
+}
+.project-details .project-contribution {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 22px;
+  margin-top: 13px;
+}
+.project-actions .text-link:hover svg {
+  transform: translate(2px, -2px);
 }
 .project-tags {
   display: flex;
@@ -1271,6 +1435,28 @@ footer a:hover {
   .project-art {
     height: 177px;
     padding: 15px;
+  }
+  .matcher-brand {
+    font-size: 10px;
+  }
+  .matcher-brand .art-menu {
+    display: none;
+  }
+  .matcher-workspace {
+    grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1fr);
+    margin: 10px 0;
+  }
+  .matcher-document {
+    padding: 8px;
+  }
+  .matcher-document strong {
+    font-size: 8px;
+  }
+  .matcher-label {
+    font-size: 5px;
+  }
+  .matcher-caption {
+    font-size: 6px;
   }
   .wellness-body {
     margin-top: 21px;

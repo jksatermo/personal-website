@@ -62,6 +62,47 @@ try {
         .length,
     "Upcoming projects are identified",
   );
+  for (const [index, project] of content.projects.entries()) {
+    const card = page.locator(".project-card").nth(index);
+    check(
+      (await card.locator("h3").innerText()) === project.title &&
+        (await card.locator(".project-status").innerText()) === project.status,
+      `${project.title} has the correct order and visible status`,
+    );
+    const links =
+      project.links ||
+      (project.url ? [{ label: "View project", url: project.url }] : []);
+    const actions = card.locator(".project-actions a");
+    check(
+      (await actions.count()) === links.length,
+      `${project.title} displays only its configured actions`,
+    );
+    for (const [linkIndex, link] of links.entries()) {
+      const action = actions.nth(linkIndex);
+      const label = await action.getAttribute("aria-label");
+      const rel = (await action.getAttribute("rel"))?.split(/\s+/);
+      check(
+        (await action.getAttribute("href")) === link.url &&
+          (await action.getAttribute("target")) === "_blank" &&
+          rel?.includes("noopener") &&
+          rel.includes("noreferrer") &&
+          label?.includes(project.title) &&
+          label.includes(link.label) &&
+          label.includes("opens in a new tab"),
+        `${project.title}: ${link.label} is descriptive and opens safely`,
+      );
+    }
+  }
+  check(
+    (await page.locator(".experience-card.compact").count()) === 2 &&
+      (await page.locator(".experience-card:not(.compact) h3").innerText()) ===
+        "Associate Programmer Analyst",
+    "Earlier roles are compact and the current role uses the official title",
+  );
+  check(
+    (await page.locator(".experience-card a:not([href])").count()) === 0,
+    "Employers without URLs are not rendered as empty links",
+  );
   for (const social of content.socials.filter((social) => social.url)) {
     check(
       (await page
@@ -188,11 +229,17 @@ try {
         await photo.scrollIntoViewIfNeeded();
         await photo.evaluate((element) => element.decode());
         check(
-          await photo.evaluate((element) => element.naturalWidth > 0 && element.getBoundingClientRect().right <= window.innerWidth),
+          await photo.evaluate(
+            (element) =>
+              element.naturalWidth > 0 &&
+              element.getBoundingClientRect().right <= window.innerWidth,
+          ),
           "Photo loads and fits the mobile viewport",
         );
       }
-      await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
       await page.screenshot({
         path: path.join(artifacts, "mobile.png"),
         fullPage: true,
@@ -218,6 +265,32 @@ try {
       .evaluate((element) => document.activeElement === element),
     "Keyboard users can skip to the content",
   );
+  const projectActions = reduced.locator(".project-actions a");
+  await projectActions.first().focus();
+  await reduced.keyboard.press("Tab");
+  check(
+    await projectActions
+      .nth(1)
+      .evaluate((element) => document.activeElement === element),
+    "Keyboard users can move between a project's actions",
+  );
+  const legacy = await browser.newPage();
+  const legacyContent = structuredClone(content);
+  delete legacyContent.projects[0].links;
+  legacyContent.projects[0].url = content.projects[0].links[0].url;
+  await legacy.route("**/api/portfolio", (route) =>
+    route.fulfill({ json: legacyContent }),
+  );
+  await legacy.goto(baseURL, { waitUntil: "networkidle" });
+  check(
+    (await legacy
+      .locator(".project-card")
+      .first()
+      .locator(".project-actions a")
+      .getAttribute("href")) === legacyContent.projects[0].url,
+    "Existing single-URL project content remains usable",
+  );
+  await legacy.close();
   check(
     errors.length === 0,
     `No uncaught browser errors: ${errors.join("; ")}`,
