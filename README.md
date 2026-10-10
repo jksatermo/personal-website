@@ -1,6 +1,6 @@
 # Jackson Satermo · Personal website
 
-An editable MERN portfolio with a warm ivory design, plum accents, a sage desktop cursor glow, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education, social profiles, professional email, and two clearly marked coming-soon projects. The public site is https://jacksonsatermo.com, hosted on Render with its domain managed through Cloudflare.
+An editable MERN portfolio with a warm ivory design, teal accents, a sage desktop cursor glow, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education and graduation photo, technical skills with experience context, social profiles, professional email, and two clearly marked coming-soon projects. The public site is https://jacksonsatermo.com, hosted on Render with its domain managed through Cloudflare.
 
 React and Vite provide the interface. Express runs the API and serves the built site in production. MongoDB stores the portfolio content through Mongoose. There is no public write API or admin login: edit the source files in your GitHub repository to update the site.
 
@@ -37,7 +37,8 @@ Most changes belong in [`content/portfolio.json`](content/portfolio.json). This 
 | Primary portrait | `profile.portrait` — `src`, `alt`, and optional `position` |
 | About section photos | `aboutPhotos` — each entry has `src`, `alt`, `caption`, and optional `position` |
 | Employment | `experience` — role, company, period, description, and skills |
-| Degree and graduation date | `education` |
+| Degree, graduation date, focus areas, and graduation photo | `education` |
+| Languages, tools, and experience context | `skillGroups` |
 | Project descriptions, status, tags, and links | `projects` |
 | Hobbies displayed below the About text | `interests` |
 
@@ -58,7 +59,7 @@ To add a future project, duplicate an object inside `projects`, give it a unique
 }
 ```
 
-When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. For the white-shirt portrait and circle group photo, add the original JPEG files to `client/public/images/` and point the photo fields above at them. See [photo instructions](client/public/images/README.md). The page crops images only for display and links to each full photo. Unavailable images are omitted; verify the actual photos load before considering the upload complete.
+When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. The portrait, graduation photo, and circle group photo use original JPEG files in `client/public/images/`; point the photo fields above at their exact filenames, including capitalization. See [photo instructions](client/public/images/README.md). The page crops images only for display and links to each full photo. Unavailable images are omitted; verify the actual photos load before considering the upload complete.
 
 For design changes:
 

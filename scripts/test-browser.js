@@ -25,7 +25,6 @@ const browser = await chromium.launch({
   args: ["--no-sandbox"],
 });
 const errors = [];
-const pendingPhotos = [];
 let checks = 0;
 function check(condition, message) {
   assert.ok(condition, message);
@@ -50,8 +49,8 @@ try {
     "Document title uses the editable name",
   );
   check(
-    (await page.locator("h1").innerText()).includes(content.profile.name),
-    "Profile name is visible",
+    (await page.locator("h1").innerText()) === content.profile.name,
+    "Profile name is visible without extra punctuation",
   );
   check(
     (await page.locator(".project-card").count()) === content.projects.length,
@@ -95,15 +94,11 @@ try {
   }
   for (const photo of [
     content.profile.portrait,
+    content.education.photo,
     ...(content.aboutPhotos || []),
   ].filter(Boolean)) {
     if (photo.src.startsWith("/")) {
-      try {
-        await access(new URL(`../client/public${photo.src}`, import.meta.url));
-      } catch {
-        pendingPhotos.push(photo.src);
-        continue;
-      }
+      await access(new URL(`../client/public${photo.src}`, import.meta.url));
     }
     const response = await page.request.get(new URL(photo.src, baseURL).href);
     check(
@@ -189,7 +184,7 @@ try {
         "Mobile avoids the desktop spotlight",
       );
       // Lazy group photos load when scrolled into view, including on phones.
-      for (const photo of await page.locator("#about img").all()) {
+      for (const photo of await page.locator("main img").all()) {
         await photo.scrollIntoViewIfNeeded();
         await photo.evaluate((element) => element.decode());
         check(
@@ -228,11 +223,6 @@ try {
     `No uncaught browser errors: ${errors.join("; ")}`,
   );
   console.log(`Passed ${checks} browser checks. Screenshots: ${artifacts}`);
-  if (pendingPhotos.length) {
-    console.log(
-      `Photo rendering is not yet verified; files pending upload: ${pendingPhotos.join(", ")}`,
-    );
-  }
 } finally {
   await browser.close();
 }
