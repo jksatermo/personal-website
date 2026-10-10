@@ -73,9 +73,23 @@ const portfolioSchema = new Schema(
       ),
     ],
     education: new Schema(
-      { degree: String, school: String, date: String },
+      {
+        degree: String,
+        school: String,
+        date: String,
+        description: String,
+        photo: new Schema(photoFields, nested),
+      },
       nested,
     ),
+    skillGroups: {
+      type: [new Schema({
+        title: { type: String, required: true },
+        description: String,
+        skills: [String],
+      }, nested)],
+      default: undefined,
+    },
     projects: [
       new Schema(
         {

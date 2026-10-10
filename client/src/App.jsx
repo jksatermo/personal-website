@@ -325,10 +325,7 @@ export default function App() {
               <p className="hello">
                 <span /> HELLO, I'M
               </p>
-              <h1>
-                {profile.name}
-                <span className="name-period">.</span>
-              </h1>
+              <h1>{profile.name}</h1>
               <p className="role">{profile.role}</p>
               <p className="tagline">{profile.tagline}</p>
               <p className="location">
@@ -437,16 +434,47 @@ export default function App() {
                 </article>
               ))}
             </div>
-            <div className="education">
-              <div className="education-icon">
-                <GraduationCap size={21} strokeWidth={1.5} />
+            <div className="education" aria-labelledby="education-title">
+              <div className="education-header">
+                <div className="education-icon">
+                  <GraduationCap size={21} strokeWidth={1.5} />
+                </div>
+                <h3 id="education-title">Education</h3>
+                <span>{education.date}</span>
               </div>
-              <div>
-                <h3>{education.school}</h3>
-                <p>{education.degree}</p>
+              <div className="education-body">
+                <div className="education-copy">
+                  <h4>{education.degree}</h4>
+                  <p className="education-school">{education.school}</p>
+                  {education.description && <p>{education.description}</p>}
+                </div>
+                {education.photo && (
+                  <div className="education-photo">
+                    <PortfolioPhoto photo={education.photo} />
+                  </div>
+                )}
               </div>
-              <span>{education.date}</span>
             </div>
+            {portfolio.skillGroups?.length > 0 && (
+              <div className="technical-skills" aria-labelledby="skills-title">
+                <h3 id="skills-title">Tools &amp; technologies</h3>
+                <dl className="skill-groups">
+                  {portfolio.skillGroups.map((group) => (
+                    <div className="skill-group" key={group.title}>
+                      <dt>{group.title}</dt>
+                      <dd>
+                        <p>{group.description}</p>
+                        <ul className="tags">
+                          {group.skills.map((skill) => (
+                            <li key={skill}><span>{skill}</span></li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
           </section>
 
           <section id="projects" aria-label="Projects">
@@ -515,6 +543,9 @@ export default function App() {
           <footer>
             <div className="footer-rule" />
             <p>Always a work in progress. Just like me.</p>
+            <p className="stack-note">
+              Built with the MERN stack: MongoDB, Express, React, and Node.js.
+            </p>
             <div>
               <span>
                 Built with intention <span className="footer-star">✧</span> Made
