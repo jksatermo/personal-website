@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Check,
   ChevronRight,
+  Clock3,
   Code2,
   Dumbbell,
   Facebook,
@@ -139,6 +140,47 @@ function PortfolioPhoto({ photo, portrait = false }) {
 }
 
 function ProjectArt({ kind, title }) {
+  if (kind === "resume-matcher")
+    return (
+      <div className="project-art matcher-art" aria-hidden="true">
+        <div className="matcher-brand">
+          <Sparkles size={15} />
+          <span>{title}</span>
+          <span className="art-menu">CONTEXT. CONNECTION. OPPORTUNITY.</span>
+        </div>
+        <div className="matcher-workspace">
+          <div className="matcher-document">
+            <span className="matcher-label">JOB DESCRIPTION</span>
+            <strong>What the role needs</strong>
+            <div className="matcher-lines">
+              <i />
+              <i />
+              <i />
+            </div>
+            <span className="matcher-highlight">Skills &amp; requirements</span>
+          </div>
+          <div className="matcher-connection">
+            <Sparkles size={17} />
+          </div>
+          <div className="matcher-document">
+            <span className="matcher-label">APPLICANT RESUME</span>
+            <strong>What a person brings</strong>
+            <div className="matcher-lines">
+              <i />
+              <i />
+              <i />
+            </div>
+            <span className="matcher-highlight">
+              Experience &amp; strengths
+            </span>
+          </div>
+        </div>
+        <div className="matcher-caption">
+          <span>Find the relevant connections.</span>
+          <span>CONCEPT ILLUSTRATION</span>
+        </div>
+      </div>
+    );
   if (kind === "wellness")
     return (
       <div className="project-art wellness-art" aria-hidden="true">
@@ -229,6 +271,71 @@ function ProjectArt({ kind, title }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function ProjectCard({ project, index }) {
+  const links =
+    project.links ??
+    (project.url ? [{ label: "View project", url: project.url }] : []);
+  const statusClass =
+    {
+      Completed: "status-completed",
+      "In development": "status-in-development",
+      "Coming soon": "status-coming-soon",
+    }[project.status] || "status-coming-soon";
+  const StatusIcon =
+    project.status === "Completed"
+      ? Check
+      : project.status === "In development"
+        ? Code2
+        : Clock3;
+
+  return (
+    <article className={`project-card ${project.kind}`}>
+      <ProjectArt kind={project.kind} title={project.title} />
+      <div className="project-details">
+        <div className="project-eyebrow">
+          <span>
+            0{index + 1} / {project.eyebrow}
+          </span>
+          <span className={`project-status ${statusClass}`}>
+            <StatusIcon size={12} aria-hidden="true" />
+            {project.status}
+          </span>
+        </div>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        {project.contribution && (
+          <p className="project-contribution">{project.contribution}</p>
+        )}
+        <div className="project-tags">
+          {project.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+        {links.length > 0 && (
+          <div
+            className="project-actions"
+            aria-label={`${project.title} links`}
+          >
+            {links.map(({ label, url }) => (
+              <a
+                className="text-link"
+                key={`${label}-${url}`}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${label}: ${project.title} (opens in a new tab)`}
+              >
+                {label}
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -405,7 +512,10 @@ export default function App() {
             <SectionHeading number="02">Where I'm growing</SectionHeading>
             <div className="experience-list">
               {experience.map((job) => (
-                <article className="experience-card" key={job.id}>
+                <article
+                  className={`experience-card${job.compact ? " compact" : ""}`}
+                  key={job.id}
+                >
                   <div className="experience-meta">
                     <span className="experience-dot" />
                     <p>{job.period}</p>
@@ -415,21 +525,33 @@ export default function App() {
                   </div>
                   <div className="experience-content">
                     <h3>{job.role}</h3>
-                    <a
-                      className="company-link"
-                      href={job.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {job.company}
-                      <ArrowUpRight size={15} />
-                    </a>
-                    <p>{job.description}</p>
-                    <div className="tags">
-                      {job.skills.map((skill) => (
-                        <span key={skill}>{skill}</span>
-                      ))}
+                    <div className="company-details">
+                      {job.url ? (
+                        <a
+                          className="company-link"
+                          href={job.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${job.company} (opens in a new tab)`}
+                        >
+                          {job.company}
+                          <ArrowUpRight size={15} aria-hidden="true" />
+                        </a>
+                      ) : (
+                        <span className="company-name">{job.company}</span>
+                      )}
+                      {job.location && (
+                        <span className="job-location">{job.location}</span>
+                      )}
                     </div>
+                    <p>{job.description}</p>
+                    {job.skills?.length > 0 && (
+                      <div className="tags">
+                        {job.skills.map((skill) => (
+                          <span key={skill}>{skill}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}
@@ -463,10 +585,12 @@ export default function App() {
                     <div className="skill-group" key={group.title}>
                       <dt>{group.title}</dt>
                       <dd>
-                        <p>{group.description}</p>
+                        {group.description && <p>{group.description}</p>}
                         <ul className="tags">
                           {group.skills.map((skill) => (
-                            <li key={skill}><span>{skill}</span></li>
+                            <li key={skill}>
+                              <span>{skill}</span>
+                            </li>
                           ))}
                         </ul>
                       </dd>
@@ -480,49 +604,13 @@ export default function App() {
           <section id="projects" aria-label="Projects">
             <SectionHeading number="03">Bringing ideas to life</SectionHeading>
             <p className="section-intro">
-              A few things I'm excited to bring to life.
+              Completed work and ideas taking shape.
               <br />
               Personal stories. Real communities. Purposeful software.
             </p>
             <div className="project-list">
               {projects.map((project, index) => (
-                <article
-                  className={`project-card ${project.kind}`}
-                  key={project.id}
-                >
-                  <ProjectArt kind={project.kind} title={project.title} />
-                  <div className="project-details">
-                    <div className="project-eyebrow">
-                      <span>
-                        0{index + 1} / {project.eyebrow}
-                      </span>
-                      <span className="coming-soon">
-                        <span />
-                        {project.status}
-                      </span>
-                    </div>
-                    <h3>
-                      {project.url ? (
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {project.title}
-                          <ArrowUpRight size={20} />
-                        </a>
-                      ) : (
-                        project.title
-                      )}
-                    </h3>
-                    <p>{project.description}</p>
-                    <div className="project-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                </article>
+                <ProjectCard project={project} index={index} key={project.id} />
               ))}
             </div>
             <a
@@ -533,6 +621,7 @@ export default function App() {
               }
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Follow ${profile.name} on GitHub (opens in a new tab)`}
             >
               <Github size={17} />
               Follow the work on GitHub

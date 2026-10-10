@@ -1,6 +1,6 @@
 # Jackson Satermo · Personal website
 
-An editable MERN portfolio with a warm ivory design, teal accents, a sage desktop cursor glow, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education and graduation photo, technical skills with experience context, social profiles, professional email, and two clearly marked coming-soon projects. The public site is https://jacksonsatermo.com, hosted on Render with its domain managed through Cloudflare.
+An editable MERN portfolio with a warm ivory design, teal accents, a sage desktop cursor glow, and About, Experience, and Projects sections. It includes Jackson's North Dakota University System role, NDSU education and graduation photo, technical skills with experience context, social profiles, professional email, and completed, in-development, and upcoming projects. The public site is https://jacksonsatermo.com, hosted on Render with its domain managed through Cloudflare.
 
 React and Vite provide the interface. Express runs the API and serves the built site in production. MongoDB stores the portfolio content through Mongoose. There is no public write API or admin login: edit the source files in your GitHub repository to update the site.
 
@@ -27,22 +27,22 @@ If a Linux cloud environment blocks MongoDB's download server but provides Docke
 
 Most changes belong in [`content/portfolio.json`](content/portfolio.json). This is the source of truth: the server validates it and syncs it to MongoDB every time the server starts. Direct changes in MongoDB will be replaced on the next server start. The development server watches content changes; refresh the browser after saving. On a hosted site, commit your changes and redeploy.
 
-| What to change | Where to edit |
-| --- | --- |
-| Name, headline, location, and short introduction | `profile.name`, `profile.role`, `profile.tagline`, `profile.location` |
-| About paragraphs | `profile.bio` — one quoted string per paragraph |
-| The small status line below social links | `profile.availability` |
-| GitHub, LinkedIn, Instagram, and Facebook links | `socials` — each entry has `name` and `url` |
-| Professional email link | `profile.email` — a plain email address |
-| Primary portrait | `profile.portrait` — `src`, `alt`, and optional `position` |
-| About section photos | `aboutPhotos` — each entry has `src`, `alt`, `caption`, and optional `position` |
-| Employment | `experience` — role, company, period, description, and skills |
-| Degree, graduation date, focus areas, and graduation photo | `education` |
-| Languages, tools, and experience context | `skillGroups` |
-| Project descriptions, status, tags, and links | `projects` |
-| Hobbies displayed below the About text | `interests` |
+| What to change                                             | Where to edit                                                                                              |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Name, headline, location, and short introduction           | `profile.name`, `profile.role`, `profile.tagline`, `profile.location`                                      |
+| About paragraphs                                           | `profile.bio` — one quoted string per paragraph                                                            |
+| The small status line below social links                   | `profile.availability`                                                                                     |
+| GitHub, LinkedIn, Instagram, and Facebook links            | `socials` — each entry has `name` and `url`                                                                |
+| Professional email link                                    | `profile.email` — a plain email address                                                                    |
+| Primary portrait                                           | `profile.portrait` — `src`, `alt`, and optional `position`                                                 |
+| About section photos                                       | `aboutPhotos` — each entry has `src`, `alt`, `caption`, and optional `position`                            |
+| Employment                                                 | `experience` — role, company, period, location, description, and skills; `compact: true` for earlier roles |
+| Degree, graduation date, focus areas, and graduation photo | `education`                                                                                                |
+| Languages, tools, and experience context                   | `skillGroups`                                                                                              |
+| Project descriptions, status, tags, and links              | `projects`                                                                                                 |
+| Hobbies displayed below the About text                     | `interests`                                                                                                |
 
-JSON requires double quotes and does not allow comments or trailing commas. Use full `https://` URLs for external links. Use `null` for a project that has no public URL yet.
+JSON requires double quotes and does not allow comments or trailing commas. Use full `https://` URLs for external links. Use `links: []` for a project with no public destination yet. Each project action is a `{ "label", "url" }` pair; use labels such as `GitHub`, `View project`, or `Live Demo`. The older single `url` field still works as a fallback when `links` is absent.
 
 To add a future project, duplicate an object inside `projects`, give it a unique `id`, and edit the fields:
 
@@ -55,11 +55,12 @@ To add a future project, duplicate an object inside `projects`, give it a unique
   "status": "Coming soon",
   "kind": "community",
   "tags": ["React", "Node.js", "MongoDB"],
-  "url": null
+  "url": null,
+  "links": []
 }
 ```
 
-When it launches, change `status` to `Live` and set `url` to its real address. `kind` selects the decorative concept illustration: currently `wellness` or `community`. These illustrations are previews of ideas, not finished project screenshots. The portrait, graduation photo, and circle group photo use original JPEG files in `client/public/images/`; point the photo fields above at their exact filenames, including capitalization. See [photo instructions](client/public/images/README.md). The page crops images only for display and links to each full photo. Unavailable images are omitted; verify the actual photos load before considering the upload complete.
+When it launches, update `status` and add a link to the real destination. `kind` selects the decorative concept illustration: `resume-matcher`, `wellness`, or `community`. The AI Resume Matcher illustration is original portfolio artwork, not a screenshot or a claim about the project’s actual interface. These illustrations are previews of ideas, not finished project screenshots. The portrait, graduation photo, and circle group photo use original JPEG files in `client/public/images/`; point the photo fields above at their exact filenames, including capitalization. See [photo instructions](client/public/images/README.md). The page crops images only for display and links to each full photo. Unavailable images are omitted; verify the actual photos load before considering the upload complete.
 
 For design changes:
 
@@ -69,6 +70,12 @@ For design changes:
 - Replace the browser icon in [`client/public/favicon.svg`](client/public/favicon.svg).
 
 The page includes keyboard focus styles, a skip link, mobile layouts, and reduced-motion support. The spotlight runs on desktop pointer movement and is disabled when reduced motion is requested.
+
+## Content follow-ups
+
+- **Resume TODO:** no resume PDF exists in this repository. Add your current, approved PDF under `client/public/` (for example, `resume.pdf`), then add a visible Resume link beside the email/social links in `client/src/App.jsx`. Do not publish a placeholder or an outdated resume.
+- **Many Rooms stack:** its repository is linked, but the planned technology tags and a new “Building with now” group are intentionally deferred until real C#, ASP.NET Core, React Native, and PostgreSQL code has been created and verified in `jksatermo/Many-Rooms`. Keep that future group separate from professional experience. The MERN footer describes this portfolio and remains accurate.
+- **Capstone source:** the AI Resume Matcher action points to the [official NDSU 2024 capstone page](https://www.ndsu.edu/computer-science/current-students/capstone-program/2024-projects#:~:text=Kompletion%20LLC). The text fragment highlights Kompletion in supporting browsers; other browsers still open the official page. The contribution is limited to membership in its four-person team, with no individual responsibilities or metrics inferred.
 
 ## Edit directly on GitHub
 
@@ -86,16 +93,19 @@ Include other changed files in `git add` as needed. Never commit database creden
 
 ## Commands and checks
 
-| Command | Purpose |
-| --- | --- |
-| `npm ci` | Install the exact locked dependencies |
-| `npm run dev` | Start MongoDB, the Express API, and the React development server |
-| `npm test` | Run API tests against an isolated real MongoDB database |
-| `npm run test:browser` | Check a running site in Chromium, including navigation, mobile layout, and reduced motion |
-| `npm run build` | Build the React client into `client/dist/` |
-| `npm start` | Run Express; requires `MONGODB_URI` and serves `client/dist/` when present |
-| `npm run seed` | Sync the content file to the database specified by `MONGODB_URI` |
-| `npm run setup:mongodb:docker` | Optional Linux/Docker fallback when MongoDB's normal binary download is blocked |
+| Command                        | Purpose                                                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------------------- |
+| `npm ci`                       | Install the exact locked dependencies                                                     |
+| `npm run dev`                  | Start MongoDB, the Express API, and the React development server                          |
+| `npm run format`               | Apply Prettier formatting                                                                 |
+| `npm run format:check`         | Verify formatting without edits                                                           |
+| `npm run lint`                 | Check JavaScript and React hooks                                                          |
+| `npm test`                     | Run API tests against an isolated real MongoDB database                                   |
+| `npm run test:browser`         | Check a running site in Chromium, including navigation, mobile layout, and reduced motion |
+| `npm run build`                | Build the React client into `client/dist/`                                                |
+| `npm start`                    | Run Express; requires `MONGODB_URI` and serves `client/dist/` when present                |
+| `npm run seed`                 | Sync the content file to the database specified by `MONGODB_URI`                          |
+| `npm run setup:mongodb:docker` | Optional Linux/Docker fallback when MongoDB's normal binary download is blocked           |
 
 Tests use a separate database and do not modify your configured production database. The first test run may also need to download MongoDB.
 

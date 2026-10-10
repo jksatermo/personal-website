@@ -66,6 +66,8 @@ const portfolioSchema = new Schema(
           company: { type: String, required: true },
           url: publicUrl,
           period: String,
+          location: String,
+          compact: Boolean,
           description: String,
           skills: [String],
         },
@@ -83,11 +85,16 @@ const portfolioSchema = new Schema(
       nested,
     ),
     skillGroups: {
-      type: [new Schema({
-        title: { type: String, required: true },
-        description: String,
-        skills: [String],
-      }, nested)],
+      type: [
+        new Schema(
+          {
+            title: { type: String, required: true },
+            description: String,
+            skills: [String],
+          },
+          nested,
+        ),
+      ],
       default: undefined,
     },
     projects: [
@@ -99,8 +106,21 @@ const portfolioSchema = new Schema(
           description: String,
           status: String,
           kind: String,
+          contribution: String,
           tags: [String],
           url: publicUrl,
+          links: {
+            type: [
+              new Schema(
+                {
+                  label: { type: String, required: true },
+                  url: { ...publicUrl, required: true },
+                },
+                nested,
+              ),
+            ],
+            default: undefined,
+          },
         },
         nested,
       ),

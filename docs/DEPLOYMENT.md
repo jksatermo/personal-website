@@ -27,17 +27,17 @@ To use the configuration:
 
 Alternatively, create **New → Web Service**, connect the same repository, and enter these values yourself:
 
-| Setting | Value |
-| --- | --- |
-| Branch | `main` |
-| Runtime | Node |
-| Root directory | Leave blank |
-| Build command | `npm ci --include=dev && npm run build` |
-| Start command | `npm start` |
-| Health check path | `/api/health` |
-| `NODE_VERSION` | `24` |
-| `NODE_ENV` | `production` |
-| `MONGODB_URI` | Your private Atlas connection string |
+| Setting           | Value                                   |
+| ----------------- | --------------------------------------- |
+| Branch            | `main`                                  |
+| Runtime           | Node                                    |
+| Root directory    | Leave blank                             |
+| Build command     | `npm ci --include=dev && npm run build` |
+| Start command     | `npm start`                             |
+| Health check path | `/api/health`                           |
+| `NODE_VERSION`    | `24`                                    |
+| `NODE_ENV`        | `production`                            |
+| `MONGODB_URI`     | Your private Atlas connection string    |
 
 The build needs the development dependencies because Vite compiles React. `--include=dev` ensures those tools are installed even when `NODE_ENV=production`. Render supplies `PORT` automatically; the server listens on that port and on `0.0.0.0`. Do not run `npm run dev` on the host: production uses Atlas rather than the local development database helper.
 

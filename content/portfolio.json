@@ -1,8 +1,8 @@
 {
   "profile": {
     "name": "Jackson Satermo",
-    "role": "Software Engineer",
-    "tagline": "Bringing ideas to life through software and electronics.",
+    "role": "Software Developer",
+    "tagline": "Building useful software around real-world problems.",
     "location": "Fargo, North Dakota",
     "availability": "Building, learning & looking ahead",
     "email": "jackson.satermo@gmail.com",
@@ -12,9 +12,9 @@
       "position": "50% 35%"
     },
     "bio": [
-      "I'm a software engineer in Fargo who enjoys understanding how people work and building tools that make their day easier. I approach unfamiliar problems with curiosity, value feedback, and enjoy learning alongside other developers.",
-      "As a Programmer Analyst at the North Dakota University System, I develop and support web applications using PeopleSoft, PeopleTools, PeopleCode, and SQL. I earned my Bachelor of Science in Computer Science from North Dakota State University in May 2025, with knowledge spanning web development and artificial intelligence.",
-      "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with a 3D printer and modifying electronics. My faith, my community, and an active life keep me grounded — and give me plenty of ideas for what to build next."
+      "I'm a software developer in Fargo who enjoys learning how people work, finding the friction in a process, and building software that makes it simpler. I like unfamiliar problems, direct feedback, and collaborating with people who understand the business from different perspectives.",
+      "At the North Dakota University System, I build and support enterprise applications used across North Dakota's public university system. My work spans Oracle SQL, PeopleCode, Application Engine, HTML, CSS, JavaScript, integrations, testing, and production support, from understanding requirements through validating and releasing changes.",
+      "Away from my keyboard, you'll usually find me playing sports, leading a large Bible study, or tinkering with 3D printing and electronics. My faith, community, and hobbies keep me grounded, curious, and usually thinking about the next thing worth building."
     ]
   },
   "aboutPhotos": [
@@ -46,25 +46,56 @@
   "experience": [
     {
       "id": "ndus",
-      "role": "Programmer Analyst",
+      "role": "Associate Programmer Analyst",
       "company": "North Dakota University System",
       "url": "https://ndus.edu/",
       "period": "JAN 2026 — PRESENT",
-      "description": "Develop and support web applications for the North Dakota University System. Work with PeopleSoft, PeopleTools, and PeopleCode, with extensive hands-on SQL experience to support the systems people rely on every day.",
+      "description": "Develop, enhance, test, and support enterprise applications for the North Dakota University System. Work across Oracle SQL, PeopleCode, Application Engine, frontend technologies, integrations, and production troubleshooting while partnering with business analysts and developers to turn requirements into reliable software.",
       "skills": [
-        "Web Development",
+        "PeopleCode",
+        "Oracle SQL",
+        "Application Engine",
         "PeopleSoft",
         "PeopleTools",
-        "PeopleCode",
-        "SQL"
+        "HTML/CSS",
+        "JavaScript",
+        "Integrations",
+        "Testing"
       ]
+    },
+    {
+      "id": "702-communications",
+      "role": "Helpdesk Technician",
+      "company": "702 Communications",
+      "url": null,
+      "period": "2025",
+      "location": "Moorhead, MN",
+      "compact": true,
+      "description": "Handled escalated internet, networking, and VoIP issues in an ISP environment, using systematic troubleshooting to identify root causes and communicate practical solutions.",
+      "skills": [
+        "Troubleshooting",
+        "Networking",
+        "Customer Support",
+        "Documentation"
+      ]
+    },
+    {
+      "id": "geek-squad",
+      "role": "Consultation Agent",
+      "company": "Geek Squad / Best Buy",
+      "url": null,
+      "period": "2022–2024",
+      "location": "Fargo, ND",
+      "compact": true,
+      "description": "Provided customer-facing technical support, translating complex hardware and software problems into clear solutions for non-technical users.",
+      "skills": []
     }
   ],
   "education": {
     "degree": "Bachelor of Science in Computer Science",
     "school": "North Dakota State University",
     "date": "MAY 2025",
-    "description": "My computer science foundation includes web development and artificial intelligence, including machine learning, neural networks, and retrieval-augmented generation (RAG). I'm continuing to build on that knowledge through hands-on projects.",
+    "description": "My computer science foundation spans object-oriented programming, data structures and algorithms, databases, web development, operating systems, networking, and artificial intelligence. Coursework and team projects gave me hands-on experience across Java, JavaScript, Python, SQL, and full-stack application development.",
     "photo": {
       "src": "/images/GradPhoto.JPEG",
       "alt": "Jackson Satermo in a green cap and gown holding his diploma at NDSU graduation.",
@@ -74,48 +105,86 @@
   "skillGroups": [
     {
       "title": "Languages",
-      "description": "Extensive JavaScript experience in college and SQL in my current role. C# through several college projects; TypeScript through web development coursework.",
-      "skills": ["JavaScript", "SQL", "C#", "TypeScript"]
+      "skills": [
+        "Java",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "PeopleCode",
+        "Python"
+      ]
     },
     {
-      "title": "Development tools",
-      "description": "Extensive experience with Visual Studio, plus professional work with the PeopleSoft platform at NDUS.",
-      "skills": ["Visual Studio", "PeopleSoft", "PeopleTools", "PeopleCode"]
+      "title": "Frameworks / platforms",
+      "skills": [
+        "React",
+        "Node.js",
+        "Express",
+        "Django",
+        "PeopleSoft",
+        "PeopleTools"
+      ]
     },
     {
-      "title": "Building with now",
-      "description": "This portfolio is my first React project, bringing together a React interface, an Express API, and MongoDB on Node.js.",
-      "skills": ["React", "Express", "MongoDB", "Node.js"]
+      "title": "Tools",
+      "skills": [
+        "Git",
+        "Visual Studio",
+        "VS Code",
+        "Oracle SQL Developer",
+        "Application Designer",
+        "Application Engine"
+      ]
     }
   ],
   "projects": [
     {
-      "id": "everyday-progress",
-      "title": "Everyday Progress",
-      "eyebrow": "HEALTH & PERSONAL GROWTH",
-      "description": "A home for the habits that helped me lose 100 lbs through diet and exercise, without GLP-1s. Sharing my journey, progress photos, go-to recipes, and practical training tips to help others find their own way forward.",
-      "status": "Coming soon",
-      "kind": "wellness",
-      "tags": [
-        "Recipes",
-        "Fitness",
-        "Personal journey"
-      ],
-      "url": null
+      "id": "ai-resume-matcher",
+      "title": "AI Resume Matcher",
+      "eyebrow": "AI & FULL-STACK DEVELOPMENT",
+      "status": "Completed",
+      "kind": "resume-matcher",
+      "description": "NDSU capstone team project for Kompletion LLC that used AI to compare job descriptions with applicant resumes and help recruiters identify strong candidates. Built with React and Chakra UI, Django, AWS PostgreSQL, and the OpenAI API.",
+      "contribution": "One of four capstone team members.",
+      "tags": ["React", "Chakra UI", "Django", "PostgreSQL", "OpenAI API"],
+      "url": null,
+      "links": [
+        {
+          "label": "View project",
+          "url": "https://www.ndsu.edu/computer-science/current-students/capstone-program/2024-projects#:~:text=Kompletion%20LLC"
+        },
+        {
+          "label": "Expo poster (PDF)",
+          "url": "https://www.ndsu.edu/fileadmin/cs/CapstoneExpoPosters/2024_Expo_Posters/Kompletion_Poster_Final.pdf"
+        }
+      ]
     },
     {
       "id": "church-reimagined",
       "title": "Many Rooms",
       "eyebrow": "COMMUNITY & BETTER TOOLS",
-      "description": "Inspired by the idea of a place for everyone—and my experience coordinating 70+ church volunteers—Many Rooms is a concept for simpler church life. It would bring schedules, team coordination, and group messaging into one place, with text-message “Accept” or “Decline” replies for volunteers without smartphones and shared conversations to help leaders resolve scheduling conflicts.",
-      "status": "Coming soon",
+      "description": "I'm building Many Rooms, a full-stack web and mobile platform designed to simplify church scheduling, volunteer coordination, events, and team communication. The product includes ideas such as SMS-based Accept/Decline responses for volunteers who aren't using the app and shared workflows that help leaders resolve scheduling conflicts.",
+      "status": "In development",
       "kind": "community",
-      "tags": [
-        "Volunteer scheduling",
-        "Team messaging",
-        "Text confirmations"
-      ],
-      "url": null
+      "tags": ["Volunteer scheduling", "Team messaging", "Text confirmations"],
+      "url": null,
+      "links": [
+        {
+          "label": "GitHub",
+          "url": "https://github.com/jksatermo/Many-Rooms"
+        }
+      ]
+    },
+    {
+      "id": "everyday-progress",
+      "title": "Everyday Progress",
+      "eyebrow": "HEALTH & PERSONAL GROWTH",
+      "description": "A personal project documenting the habits, nutrition, training, and systems behind my 100-pound weight-loss journey, with practical recipes, progress tracking, and lessons that may help others build sustainable routines.",
+      "status": "Coming soon",
+      "kind": "wellness",
+      "tags": ["Recipes", "Fitness", "Personal journey"],
+      "url": null,
+      "links": []
     }
   ],
   "interests": [
